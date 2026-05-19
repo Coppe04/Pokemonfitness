@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Pokemonfitness/static/css/main.2fb95470.css",
+    "main.js": "/Pokemonfitness/static/js/main.ba9c926d.js",
+    "index.html": "/Pokemonfitness/index.html",
+    "main.2fb95470.css.map": "/Pokemonfitness/static/css/main.2fb95470.css.map",
+    "main.ba9c926d.js.map": "/Pokemonfitness/static/js/main.ba9c926d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2fb95470.css",
+    "static/js/main.ba9c926d.js"
+  ]
+}
