@@ -1,0 +1,261 @@
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border);
+  padding: 20px;
+  margin-bottom: 14px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.decorCircle {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: var(--color-primary-xlight);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.nameRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.name {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 11px;
+  color: var(--color-text);
+}
+
+.typeBadge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 99px;
+}
+
+.spriteArea {
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 8px 0;
+}
+
+.sprite {
+  height: 96px;
+  image-rendering: pixelated;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  filter: drop-shadow(0 6px 12px rgba(83, 74, 183, 0.25));
+  animation: float 3s ease-in-out infinite;
+}
+
+.loaded {
+  opacity: 1;
+}
+
+.spritePlaceholder {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--color-primary-xlight);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+.levelBadge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-primary-light);
+  background: var(--color-primary-xlight);
+  padding: 4px 12px;
+  border-radius: 99px;
+  margin-bottom: 14px;
+  font-family: 'Press Start 2P', monospace;
+}
+
+.bars {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.barRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.barLabel {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  min-width: 22px;
+  text-align: left;
+}
+
+.barTrack {
+  flex: 1;
+  height: 8px;
+  background: var(--color-surface-2);
+  border-radius: 99px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.barFill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.barXp { background: linear-gradient(90deg, #534AB7, #7F77DD); }
+.barHp { background: linear-gradient(90deg, #1D9E75, #5DCAA5); }
+
+.barValue {
+  font-size: 10px;
+  color: var(--color-text-muted);
+  min-width: 60px;
+  text-align: right;
+}
+
+.evolveBanner {
+  margin-top: 14px;
+  width: 100%;
+  background: var(--color-primary);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.evolveBanner:hover { opacity: 0.9; transform: scale(1.01); }
+.evolveBanner:active { transform: scale(0.98); }
+
+.evolveIcon { font-size: 22px; }
+
+.evolveText {
+  flex: 1;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.evolveText strong {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: #EEEDFE;
+}
+
+.evolveText span {
+  font-size: 11px;
+  color: #AFA9EC;
+}
+
+.evolveArrow {
+  font-size: 24px;
+  color: #EEEDFE;
+  font-weight: 300;
+}
+
+/* ── Status Badges ── */
+.statusRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.statusBadge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+
+.buff   { background: rgba(34,197,94,0.15);   color: #4ade80; border: 1px solid rgba(34,197,94,0.3);   }
+.debuff { background: rgba(239,68,68,0.15);   color: #f87171; border: 1px solid rgba(239,68,68,0.3);   }
+
+/* ── Battle Stats ── */
+.battleStats {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.battleStatsTitle {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  margin: 0 0 4px;
+  text-align: left;
+}
+
+.statRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.statLabel {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  min-width: 58px;
+  text-align: left;
+}
+
+.statTrack {
+  flex: 1;
+  height: 6px;
+  background: var(--color-surface-2);
+  border-radius: 99px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.statFill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.statValue {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  min-width: 26px;
+  text-align: right;
+}
+

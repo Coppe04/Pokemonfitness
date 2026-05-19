@@ -1,0 +1,62 @@
+.selector {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  margin-bottom: 14px;
+  scrollbar-width: none;
+}
+
+.selector::-webkit-scrollbar { display: none; }
+
+.chip {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  cursor: pointer;
+  transition: all 0.15s;
+  position: relative;
+}
+
+.chip:hover {
+  border-color: var(--color-primary-mid);
+  transform: translateY(-1px);
+}
+
+.chip.active {
+  background: var(--color-primary-xlight);
+  border-color: var(--color-primary-light);
+}
+
+.chipImg {
+  width: 40px;
+  height: 40px;
+  image-rendering: pixelated;
+}
+
+.chipName {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.chip.active .chipName {
+  color: var(--color-primary);
+}
+
+.evolvedDot {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-green);
+  border: 1.5px solid white;
+}

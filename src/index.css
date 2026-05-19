@@ -1,0 +1,40 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-primary: #3C3489;
+  --color-primary-light: #534AB7;
+  --color-primary-xlight: #EEEDFE;
+  --color-primary-mid: #AFA9EC;
+  --color-green: #1D9E75;
+  --color-green-light: #5DCAA5;
+  --color-fire: #D85A30;
+  --color-bg: #F4F3FF;
+  --color-surface: #FFFFFF;
+  --color-surface-2: #F8F7FF;
+  --color-text: #1a1a2e;
+  --color-text-muted: #6B6B8A;
+  --color-border: rgba(83, 74, 183, 0.15);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  font-family: 'Nunito', sans-serif;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}

@@ -1,0 +1,89 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.sectionTitle {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.limits {
+  display: flex;
+  gap: 6px;
+}
+
+.badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 20px;
+}
+
+.badgeWorkout {
+  background: rgba(139, 92, 246, 0.15);
+  color: var(--color-primary-light);
+}
+
+.badgeFood {
+  background: rgba(34, 197, 94, 0.12);
+  color: var(--color-green);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  padding: 14px 12px;
+  cursor: pointer;
+  transition: transform 0.15s, border-color 0.2s, box-shadow 0.2s;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.card:not(.cardDisabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(83, 74, 183, 0.12);
+}
+
+.card:not(.cardDisabled):active { transform: scale(0.97); }
+
+.cardWorkout { border-left: 3px solid var(--color-primary-light); }
+.cardFood    { border-left: 3px solid var(--color-green); }
+
+/* Estado desabilitado (limite atingido) */
+.cardDisabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+  border-left-color: var(--color-border);
+  filter: grayscale(0.6);
+}
+
+.emoji { font-size: 22px; margin-bottom: 2px; }
+.name  { font-size: 12px; font-weight: 700; color: var(--color-text); }
+.xp    { font-size: 11px; font-weight: 600; color: var(--color-primary-light); }
+
+.limitTag {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  padding: 1px 5px;
+  width: fit-content;
+}
