@@ -315,3 +315,33 @@
   30% { transform: translate(-50%, -15px) scale(1); }
   100% { opacity: 0; transform: translate(-50%, -40px) scale(1); }
 }
+
+/* ── Exaustado (0 HP) ── */
+.exhaustedBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  gap: 0.75rem;
+}
+.exhaustedEmoji {
+  font-size: 3.5rem;
+  animation: pulse 2s infinite ease-in-out;
+}
+.exhaustedText {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #ef4444;
+  margin: 0;
+}
+.exhaustedSub {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.4;
+  margin: 0 0 1.5rem 0;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}

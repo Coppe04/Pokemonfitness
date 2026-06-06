@@ -90,7 +90,6 @@ export default function App() {
           onClose={() => setShowBattle(false)}
           onBattleEnd={(result) => {
             handleBattleEnd(result);
-            setShowBattle(false);
           }}
         />
       )}

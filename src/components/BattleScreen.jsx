@@ -29,6 +29,7 @@ export default function BattleScreen({ playerPoke, battleStatus, onClose, onBatt
   const [isPlayerTurn, setIsPlayerTurn] = useState(true);
   const [result, setResult] = useState(null); // 'win' | 'lose'
   const [busy, setBusy] = useState(false);
+  const [oppDefending, setOppDefending] = useState(false);
 
   // Estados de Animação
   const [playerAnim, setPlayerAnim] = useState(null);
@@ -39,17 +40,6 @@ export default function BattleScreen({ playerPoke, battleStatus, onClose, onBatt
   const eff = getEffectiveStats(playerPoke.battleStats, battleStatus);
 
   const addLog = (msg) => setLog((l) => [msg, ...l].slice(0, 6));
-
-  const startBattle = (wild) => {
-    setOpponent(wild);
-    setOpponentHp(wild.maxHp);
-    setPlayerHp(playerPoke.currentHp);
-    setLog([`⚔️ ${playerPoke.name} vs ${wild.name}! Vá!`]);
-    const playerFirst = eff.spd >= wild.spd;
-    setIsPlayerTurn(playerFirst);
-    if (!playerFirst) addLog(`${wild.name} age primeiro!`);
-    setPhase(PHASES.FIGHT);
-  };
 
   const runOpponentTurn = useCallback((curPlayerHp, opp, playerDefending) => {
     setBusy(true);
@@ -62,13 +52,16 @@ export default function BattleScreen({ playerPoke, battleStatus, onClose, onBatt
       const isAttack = move === 'special' || move === 'attack';
       
       if (move === 'defend') {
-        msg = `🛡️ ${opp.name} se defende!`;
+        msg = `🛡️ ${opp.name} se defende! DEF +50%`;
+        setOppDefending(true);
       } else if (move === 'special') {
         dmg = calcDamage(opp.spatk, eff.spdef);
         msg = `🔮 ${opp.name} usou Ataque Especial! -${dmg} HP`;
+        setOppDefending(false);
       } else {
         dmg = calcDamage(opp.atk, defStat);
         msg = `⚔️ ${opp.name} atacou! -${dmg} HP`;
+        setOppDefending(false);
       }
 
       addLog(msg);
@@ -105,6 +98,21 @@ export default function BattleScreen({ playerPoke, battleStatus, onClose, onBatt
     }, 800);
   }, [eff, onBattleEnd]);
 
+  const startBattle = (wild) => {
+    setOpponent(wild);
+    setOpponentHp(wild.maxHp);
+    setPlayerHp(playerPoke.currentHp);
+    setLog([`⚔️ ${playerPoke.name} vs ${wild.name}! Vá!`]);
+    setOppDefending(false);
+    const playerFirst = eff.spd >= wild.spd;
+    setIsPlayerTurn(playerFirst);
+    if (!playerFirst) {
+      addLog(`${wild.name} age primeiro!`);
+      runOpponentTurn(playerPoke.currentHp, wild, false);
+    }
+    setPhase(PHASES.FIGHT);
+  };
+
   const handlePlayerMove = (move) => {
     if (!isPlayerTurn || busy || phase !== PHASES.FIGHT) return;
     setBusy(true);
@@ -122,22 +130,25 @@ export default function BattleScreen({ playerPoke, battleStatus, onClose, onBatt
       msg = `🛡️ ${playerPoke.name} se defende! DEF +50%`;
     } else if (move === 'special') {
       const isConfused = battleStatus.some((c) => c.effect === 'all_penalty');
+      const oppSpdef = oppDefending ? Math.floor(opponent.spdef * 1.5) : opponent.spdef;
       if (isConfused && Math.random() < 0.25) {
         dmg = Math.floor(calcDamage(eff.spatk, eff.spdef) * 0.5);
         msg = `😵 Confuso! ${playerPoke.name} acertou a si mesmo! -${dmg} HP`;
         isAttack = 'self';
       } else {
-        dmg = calcDamage(eff.spatk, opponent.spdef);
+        dmg = calcDamage(eff.spatk, oppSpdef);
         msg = `🔮 ${playerPoke.name} usou Ataque Especial! -${dmg} HP`;
         isAttack = 'opponent';
       }
     } else {
-      dmg = calcDamage(eff.atk, opponent.def);
+      const oppDef = oppDefending ? Math.floor(opponent.def * 1.5) : opponent.def;
+      dmg = calcDamage(eff.atk, oppDef);
       msg = `⚔️ ${playerPoke.name} atacou! -${dmg} HP`;
       isAttack = 'opponent';
     }
 
     addLog(msg);
+    setOppDefending(false);
 
     const checkEndPlayer = (finalOppHp, finalPlayerHp) => {
       if (finalOppHp <= 0) {
