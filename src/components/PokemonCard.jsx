@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { spriteAnimatedUrl, spriteStaticUrl } from '../data/pokemon';
+import { POKEMON_DIALOGUES } from '../data/story';
+import PokemonDialogue from './PokemonDialogue';
 import styles from './PokemonCard.module.css';
 
 const STAT_CONFIG = [
@@ -10,7 +12,7 @@ const STAT_CONFIG = [
   { key: 'spdef', label: 'SP.DEF',emoji: '💠',  color: '#06b6d4' },
 ];
 
-export default function PokemonCard({ poke, baseData, xpPercent, canEvolve, onEvolve, battleStatus }) {
+export default function PokemonCard({ poke, baseData, xpPercent, canEvolve, onEvolve, battleStatus, gameState }) {
   const [imgSrc, setImgSrc] = useState(null);
   const [loaded, setLoaded] = useState(false);
 
@@ -39,6 +41,9 @@ export default function PokemonCard({ poke, baseData, xpPercent, canEvolve, onEv
       <div className={styles.spriteArea}>
         {imgSrc && <img src={imgSrc} alt={poke.name} className={`${styles.sprite} ${loaded ? styles.loaded : ''}`} />}
         {!loaded && <div className={styles.spritePlaceholder} />}
+        {gameState && (
+          <PokemonDialogue text={POKEMON_DIALOGUES.find(d => d.condition(gameState))?.text} />
+        )}
       </div>
 
       <div className={styles.levelBadge}>Lv. {poke.level}</div>

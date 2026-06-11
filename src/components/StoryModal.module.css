@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 1200;
+  padding-bottom: 20px;
+}
+
+.dialogContainer {
+  width: 90%;
+  max-width: 600px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatarBox {
+  width: 120px;
+  height: 120px;
+  margin-bottom: -20px;
+  z-index: 10;
+  animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.avatarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated; /* Ensures pixel art stays crisp */
+}
+
+@keyframes popIn {
+  from { transform: scale(0.5) translateY(20px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.dialogBox {
+  width: 100%;
+  background: #f8f8f8;
+  border: 4px solid #303030;
+  border-radius: 8px;
+  box-shadow: 0 4px 0 #1a1a1a, inset 0 0 0 2px #d0d0d0;
+  font-family: 'Press Start 2P', monospace;
+  position: relative;
+  padding: 16px;
+  cursor: pointer;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.speakerBox {
+  position: absolute;
+  top: -20px;
+  left: 10px;
+  background: #303030;
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 0.6rem;
+  border: 2px solid #f8f8f8;
+  border-radius: 4px;
+  box-shadow: 2px 2px 0 #1a1a1a;
+}
+
+.textBox {
+  min-height: 80px;
+  position: relative;
+}
+
+.text {
+  font-size: 0.7rem;
+  line-height: 1.8;
+  color: #202020;
+  margin: 0;
+}
+
+.cursor {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 0.7rem;
+  color: #e83030;
+  animation: bounce 0.8s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}

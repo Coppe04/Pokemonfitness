@@ -1,0 +1,93 @@
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 16px 20px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  border-left: 4px solid #8b5cf6;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.card.completed {
+  border-left-color: #10b981;
+  background: #f0fdf4;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.giverInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.avatarImg {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  image-rendering: pixelated;
+}
+
+.giver {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #6366f1;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.completed .giver {
+  color: #10b981;
+}
+
+.status {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: white;
+  background: #10b981;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.text {
+  font-size: 0.95rem;
+  color: #1f2937;
+  font-style: italic;
+  margin: 0 0 12px 0;
+  line-height: 1.4;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  font-size: 0.8rem;
+}
+
+.objective {
+  color: #4b5563;
+  flex: 1;
+}
+
+.objective strong {
+  color: #374151;
+}
+
+.reward {
+  font-weight: 700;
+  color: #f59e0b;
+  background: #fef3c7;
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin-left: 12px;
+}

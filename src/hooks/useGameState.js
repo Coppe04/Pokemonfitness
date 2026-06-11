@@ -32,6 +32,13 @@ const INITIAL_STATE = {
   toast: null,
   dailyStats: { date: todayStr(), workout: 0, food: 0 },
   activityTracking: { ...INITIAL_ACTIVITY },
+  badgesEarned: [],
+  storyCutscenesSeen: [],
+  dailyMission: null,
+  totalWorkouts: 0,
+  totalMeals: 0,
+  totalSleep: 0,
+  totalWaterDays: 0,
 };
 
 /** Aplica decay de stats por dias sem atividade */
@@ -123,10 +130,14 @@ export function useGameState() {
       // Atualiza rastreamento de atividades
       const track = getValidatedActivity(s.activityTracking);
       const updatedTrack = { ...track };
+      let newWaterDays = s.totalWaterDays;
       if (action.type === 'workout') { updatedTrack.hadWorkout = true; updatedTrack.lastWorkoutDate = todayStr(); }
       if (action.id === 'meal')   updatedTrack.hadMeal = true;
       if (action.id === 'sleep')  updatedTrack.hadSleep = true;
-      if (action.id === 'water')  updatedTrack.waterLiters += 2; // default 2L
+      if (action.id === 'water') {
+        if (updatedTrack.waterLiters === 0) newWaterDays++;
+        updatedTrack.waterLiters += 2; // default 2L
+      }
 
       return {
         ...s,
@@ -136,6 +147,10 @@ export function useGameState() {
         toast: toastMsg,
         dailyStats: { ...daily, [action.type]: count + 1 },
         activityTracking: updatedTrack,
+        totalWorkouts: action.type === 'workout' ? s.totalWorkouts + 1 : s.totalWorkouts,
+        totalMeals: action.id === 'meal' ? s.totalMeals + 1 : s.totalMeals,
+        totalSleep: action.id === 'sleep' ? s.totalSleep + 1 : s.totalSleep,
+        totalWaterDays: newWaterDays,
       };
     });
 
@@ -204,9 +219,64 @@ export function useGameState() {
 
   const battleStatus = computeStatus(currentPoke.battleStats, state.activityTracking);
 
+  const markCutsceneSeen = useCallback((id) => {
+    setState((s) => ({
+      ...s,
+      storyCutscenesSeen: [...new Set([...s.storyCutscenesSeen, id])],
+    }));
+  }, []);
+
+  const awardBadge = useCallback((badgeId) => {
+    setState((s) => {
+      if (s.badgesEarned.includes(badgeId)) return s;
+      return { ...s, badgesEarned: [...s.badgesEarned, badgeId] };
+    });
+  }, []);
+
+  const setDailyMission = useCallback((missionId) => {
+    setState((s) => ({
+      ...s,
+      dailyMission: { date: todayStr(), missionId, completed: false },
+    }));
+  }, []);
+
+  const completeDailyMission = useCallback((xpGain = 0) => {
+    setState((s) => {
+      if (!s.dailyMission || s.dailyMission.completed) return s;
+      
+      let trainerLeveledUp = false;
+      const pokemon = s.pokemon.map(poke => {
+        let currentXp = poke.currentXp + xpGain;
+        let level = poke.level;
+        
+        if (currentXp >= poke.xpToEvolve) {
+          currentXp -= poke.xpToEvolve;
+          level += 1;
+          trainerLeveledUp = true;
+        }
+        
+        return {
+          ...poke,
+          currentXp,
+          level
+        };
+      });
+
+      return { 
+        ...s, 
+        pokemon,
+        trainerLevel: trainerLeveledUp ? s.trainerLevel + 1 : s.trainerLevel,
+        toast: xpGain > 0 ? `🌟 Missão concluída! +${xpGain} XP para todos!` : s.toast,
+        dailyMission: { ...s.dailyMission, completed: true } 
+      };
+    });
+    if (xpGain > 0) setTimeout(() => setState((s) => ({ ...s, toast: null })), 3000);
+  }, []);
+
   return {
     state, currentPoke, baseData, canEvolve, xpPercent,
     dailyRemaining, battleStatus,
     selectPokemon, doAction, evolvePokemon, applyBattleResult,
+    markCutsceneSeen, awardBadge, setDailyMission, completeDailyMission,
   };
 }

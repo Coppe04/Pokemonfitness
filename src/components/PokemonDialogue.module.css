@@ -1,0 +1,55 @@
+.balloon {
+  position: absolute;
+  top: 10%;
+  right: -5%;
+  background: white;
+  border: 2px solid #303030;
+  border-radius: 12px;
+  padding: 10px 14px;
+  max-width: 140px;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.15);
+  animation: float 3s ease-in-out infinite, popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 10;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.text {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #303030;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.tail {
+  position: absolute;
+  bottom: -10px;
+  left: 20px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 10px solid #303030;
+}
+
+.tail::after {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  left: -6px;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid white;
+}
