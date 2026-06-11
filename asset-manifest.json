@@ -1,13 +1,16 @@
 {
   "files": {
-    "main.css": "/Pokemonfitness/static/css/main.2fb95470.css",
-    "main.js": "/Pokemonfitness/static/js/main.ba9c926d.js",
+    "main.css": "/Pokemonfitness/static/css/main.c0a1082a.css",
+    "main.js": "/Pokemonfitness/static/js/main.dd2d86d3.js",
+    "static/media/cmt_calorix.png": "/Pokemonfitness/static/media/cmt_calorix.239abd93b8b47b5f16c1.png",
+    "static/media/rival_sedentauro.png": "/Pokemonfitness/static/media/rival_sedentauro.7618be5fbbc6faa0c56d.png",
+    "static/media/prof_gymrat.png": "/Pokemonfitness/static/media/prof_gymrat.8a88ad9845d94fcf3fb7.png",
     "index.html": "/Pokemonfitness/index.html",
-    "main.2fb95470.css.map": "/Pokemonfitness/static/css/main.2fb95470.css.map",
-    "main.ba9c926d.js.map": "/Pokemonfitness/static/js/main.ba9c926d.js.map"
+    "main.c0a1082a.css.map": "/Pokemonfitness/static/css/main.c0a1082a.css.map",
+    "main.dd2d86d3.js.map": "/Pokemonfitness/static/js/main.dd2d86d3.js.map"
   },
   "entrypoints": [
-    "static/css/main.2fb95470.css",
-    "static/js/main.ba9c926d.js"
+    "static/css/main.c0a1082a.css",
+    "static/js/main.dd2d86d3.js"
   ]
 }
